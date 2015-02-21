@@ -22,6 +22,7 @@ Now you can add a Widget using the Datasource: Click on "ADD PANE" on the top le
 Choose the appropriate datasource. If Freeboard already received data from your node it will also offer you available properties - so best would be to hit the inject node within Node-RED at least once.
 
 Thats it, here is your widget:
+
 ![Widget](./docs/freeboard_widget.png)
 
 Don't forget to save your dashboard by hitting "SAVE FREEBOARD" on the top left.
