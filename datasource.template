@@ -1,0 +1,41 @@
+//https://github.com/Freeboard/plugins/blob/master/datasources/plugin_example.js
+(function(){
+var dsid="{{id}}";
+freeboard.loadDatasourcePlugin({
+    "type_name": "{{name}}",
+    "display_name": "{{display_name}}",
+    "description": "{{description}}",
+    "settings": [
+	],
+	
+    newInstance: function(settings, newInstanceCallback, updateCallback) {
+        newInstanceCallback(new myDatasourcePlugin(settings, updateCallback));
+    }
+});
+var myDatasourcePlugin = function(settings, updateCallback) {
+    var self = this;
+    var currentSettings = settings;
+	self.id=dsid;
+	
+	ux.freeboard.addDatasource(self);
+	self.update = function(data){
+		updateCallback(data);
+	}
+    self.onSettingsChanged = function(newSettings) {
+        currentSettings = newSettings;
+    }
+    self.updateNow = function() {
+		$.ajax({
+			url: "../freeboard_api/datasourceupdate?direct=true"
+		}).done(function(data) {
+			var pdata=JSON.parse(data);
+			if (typeof(pdata[dsid])!=="undefined"){
+				updateCallback(pdata[dsid]);
+			}
+		});
+    }
+    self.onDispose = function() {
+        ux.freeboard.removeDatasource(self);
+    }
+}
+})();

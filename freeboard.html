@@ -1,0 +1,47 @@
+<!--
+  Copyright 2015 Urbiworx
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="freeboard">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-file"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="freeboard">
+	Using this node you can transmit information to freeboard. Just send some JSON msgs (for example using a function node) to this node and receive them in freeboard.<br/>
+	Open your local <a target="_freeboard" href="./freeboard">Freeboard</a> and add the Datasource that is named like the Freeboard Node in Node-RED (see "name" below "Proerties" in the table above).
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('freeboard',{
+        category: 'advanced-function',
+        color:"darksalmon",
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "arrow-in.png",
+        align: "right",
+        label: function() {
+            return this.name;
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
