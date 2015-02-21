@@ -26,7 +26,7 @@ module.exports = function(RED) {
 		if (err) throw err;
 		dstemplate=data.toString();
 	});
-	fs.readFile(__dirname+"/datasource.lib", function (err, data) {
+	fs.readFile(__dirname+"/datasource.jsheader", function (err, data) {
 		if (err) throw err;
 		dslib=data.toString();
 	});

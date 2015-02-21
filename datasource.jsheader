@@ -1,0 +1,26 @@
+var ux={freeboard:{}};
+ux.freeboard.datasources={};
+ux.freeboard.addDatasource=function(datasource){
+	ux.freeboard.datasources[datasource.id]=datasource;
+}
+ux.freeboard.removeDatasource=function(datasource){
+	delete(ux.freeboard.datasources[datasource.id]);
+}
+ux.freeboard.poll=function(){
+	$.ajax({
+		url: "../freeboard_api/datasourceupdate"
+	}).done(function(data) {
+		var pdata=JSON.parse(data);
+		for(var name in pdata)
+		{
+			if (pdata.hasOwnProperty(name))
+			{
+				if (typeof(ux.freeboard.datasources[name])!=="undefined"){
+					ux.freeboard.datasources[name].update(pdata[name]);
+				}
+			}
+		}
+		ux.freeboard.poll();
+	});
+}
+ux.freeboard.poll();
