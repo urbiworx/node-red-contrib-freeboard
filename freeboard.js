@@ -19,6 +19,11 @@ var fs=require("fs");
 var bodyParser = require('body-parser')
 module.exports = function(RED) {
     "use strict";
+	var userDir="";
+	if (RED.settings.userDir){
+		userDir=RED.settings.userDir+"/";
+	} 
+
 	var dstemplate;
 	var dslib;
 	var pendingresponses=new Array();
@@ -84,7 +89,7 @@ module.exports = function(RED) {
 	);
 	RED.httpNode.post("/freeboard_api/dashboard",
 		function (req,res){
-			fs.writeFile(RED.settings.userDir+"/freeboard_"+req.body.name+".json", req.body.content, function (err, data) {
+			fs.writeFile(userDir+"freeboard_"+req.body.name+".json", req.body.content, function (err, data) {
 				if (err) throw err;
 				res.end();
 			});
@@ -106,7 +111,7 @@ module.exports = function(RED) {
 	);
 	RED.httpNode.get("/freeboard_api/dashboard/:name",
 		function (req,res){
-			fs.readFile(RED.settings.userDir+"/freeboard_"+req.params.name+".json", function (err, data) {
+			fs.readFile(userDir+"freeboard_"+req.params.name+".json", function (err, data) {
 				if (err) {
 					res.end(JSON.stringify({empty:true}));
 				} else {
