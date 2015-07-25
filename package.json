@@ -21,5 +21,8 @@
     "nodes": {
       "freeboard": "freeboard.js"
     }
+  },
+  "scripts": {
+    "postinstall": "sed -i'' 's|head.js(\"js/freeboard+plugins.min.js\",|head.js(\"js/freeboard+plugins.min.js\", \"../freeboard_api/datasources\",|' node_modules/freeboard/index.html"
   }
 }
