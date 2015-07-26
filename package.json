@@ -23,6 +23,10 @@
     }
   },
   "scripts": {
+<<<<<<< HEAD
+    "postinstall": "node rewriteindex.js"
+=======
     "postinstall": "sed -i'' 's|head.js(\"js/freeboard+plugins.min.js\",|head.js(\"js/freeboard+plugins.min.js\", \"../freeboard_api/datasources\",|' node_modules/freeboard/index.html"
+>>>>>>> 985a2979b9a7b939b541cdea4c2eb9fb4441ac02
   }
 }
