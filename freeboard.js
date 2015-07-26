@@ -22,7 +22,7 @@ module.exports = function(RED) {
 	var userDir="";
 	if (RED.settings.userDir){
 		userDir=RED.settings.userDir+"/";
-	} 
+	}
 
 	var dstemplate;
 	var dslib;
@@ -35,7 +35,7 @@ module.exports = function(RED) {
 		if (err) throw err;
 		dslib=data.toString();
 	});
-	
+
 	var nodes=new Array();
     function Freeboard(n) {
         RED.nodes.createNode(this,n);
@@ -63,7 +63,7 @@ module.exports = function(RED) {
 			resp[i].end(JSON.stringify(ret));
 		}
 	}
-	
+
 	function interval(){
 		var resp=pendingresponses;
 		pendingresponses=new Array();
@@ -73,11 +73,11 @@ module.exports = function(RED) {
 	}
 	setInterval(interval,60000);
 
-	
-	RED.httpNode.use(bodyParser.urlencoded({     
+
+	RED.httpNode.use(bodyParser.urlencoded({
 		extended: true
-	})); 
-	RED.httpNode.use("/freeboard",express.static(__dirname + '/freeboard'));
+	}));
+	RED.httpNode.use("/freeboard",express.static(__dirname + '/node_modules/freeboard'));
 	RED.httpNode.get("/freeboard_api/datasources",
 		function (req,res){
 			res.write(dslib);
@@ -93,7 +93,7 @@ module.exports = function(RED) {
 				if (err) throw err;
 				res.end();
 			});
-			
+
 		}
 	);
 	RED.httpNode.get("/freeboard_api/datasourceupdate",
@@ -118,7 +118,7 @@ module.exports = function(RED) {
 					res.end(data.toString());
 				}
 			});
-			
+
 		}
 	);
     RED.nodes.registerType("freeboard",Freeboard);
