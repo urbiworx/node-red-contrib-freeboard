@@ -1,9 +1,31 @@
 var fs = require('fs')
+
+var head=
+  'head.js("js/freeboard.js","js/freeboard.plugins.min.js", "../freeboard_api/datasources",\n'+
+  'function(){'+
+  '                  $(function()\n'+
+  '                  { //DOM Ready\n'+
+  '                      freeboard.initialize(true);\n'+
+  '                      var hash = window.location.hash;\n'+
+  '                      if (hash !== null) {\n'+
+  '                          $.get("/freeboard_api/dashboard/"+hash.substring(1), function(data) {\n'+
+  '							var datap=JSON.parse(data);\n'+
+  '							if (!datap.empty){\n'+
+  '								freeboard.loadDashboard(datap, function() {\n'+
+  '									freeboard.setEditing(false);\n'+
+  '									});\n'+
+  '								}\n'+
+  '	                        });\n'+
+  '	                     }\n'+
+  '	                 });\n'+
+  '	            });\n'+
+  '	</script>';
+  
 fs.readFile('node_modules/freeboard/index.html' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
-  var result = data.replace('head.js("js/freeboard+plugins.min.js",', 'head.js("js/freeboard.js","js/freeboard.plugins.min.js", "../freeboard_api/datasources",');
+  var result = data.replace(/head.js[\s\S]*?<\/script>/g, head);
   fs.writeFile('node_modules/freeboard/index.html', result, 'utf8', function (err) {
      if (err) return console.log(err);
   });
