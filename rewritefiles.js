@@ -1,7 +1,7 @@
 var fs = require('fs')
 
 var head=
-  'head.js("js/freeboard.js","js/freeboard.plugins.min.js", "../freeboard_api/datasources",\n'+
+  'head.js("js/freeboard.js","js/freeboard.plugins.min.js", "../freeboard_api/datasources", "plugins/thirdparty/jquery.keyframes.min.js", "plugins/thirdparty/widget.ragIndicator.js",\n'+
   'function(){'+
   '                  $(function()\n'+
   '                  { //DOM Ready\n'+
@@ -20,7 +20,7 @@ var head=
   '	                 });\n'+
   '	            });\n'+
   '	</script>';
-  
+
 fs.readFile('node_modules/freeboard/index.html' , 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
@@ -65,3 +65,7 @@ fs.readFile('node_modules/freeboard/js/freeboard.js' , 'utf8', function (err,dat
      if (err) return console.log(err);
   });
 });
+
+// Copy the plugins across
+fs.createReadStream('freeboard-widget-rag-files/jquery.keyframes.min.js').pipe(fs.createWriteStream('node_modules/freeboard/plugins/thirdparty/jquery.keyframes.min.js'));
+fs.createReadStream('freeboard-widget-rag-files/widget.ragIndicator.js').pipe(fs.createWriteStream('node_modules/freeboard/plugins/thirdparty/widget.ragIndicator.js'));
