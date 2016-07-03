@@ -25,4 +25,7 @@ Thats it, here is your widget:
 
 ![Widget](./docs/freeboard_widget.png)
 
-Don't forget to save your dashboard by hitting "SAVE FREEBOARD" on the top left.
+Don't forget to save your dashboard by hitting "SAVE FREEBOARD" (then "[MINIFIED]") on the top left.
+
+#Contributions
+Thanks to reyiyo and adamfr33man for their contributions to this project!

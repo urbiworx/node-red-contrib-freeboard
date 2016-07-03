@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-freeboard",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Freeboard Dashboard Node for Node-RED",
   "dependencies": {
     "body-parser": "1.12.0",
